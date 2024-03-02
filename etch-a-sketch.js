@@ -1,12 +1,14 @@
-const divRow = document.createElement('div');
-const divColumn = document.createElement('div');
+// const divRow = document.createElement('div');
+const container = document.querySelector('#container');
+const rowItems = document.querySelectorAll('.rowItem');
+const colItems = document.querySelectorAll('.colItem');
+
 
 // init declaration of selectedColor and args
-let selectedColor = '';
-let args = 16;
+let selectedColor = 'black';
+let args = 32;
 
-divRow.setAttribute('class', 'row');
-divColumn.setAttribute('class', 'column');
+// rowItems.setAttribute('class', 'row');
 
 // add a button to the top of the screen that will send the user 
 // a popup asking for the number of squares per side for the new grid. Once 
@@ -20,7 +22,11 @@ buttonDiv.addEventListener('click', (event) => {
     let target = event.target;
 
     switch(target.id) {
-        case 'white':
+
+        case 'changeGrid':
+            changeGrid();
+            break;
+        case 'eraser':
             addColor();
             selectedColor = 'white';
             break;
@@ -110,6 +116,8 @@ function addColor() {
 // each iteration creates a new div and appends it
 // might need distinct functions for row and column
 function makeGrid() {
+    // args = 16;
+
     for (let i = 0; i < args; i++) {
         
         // creates a row
@@ -124,12 +132,42 @@ function makeGrid() {
             newRowItem.appendChild(newColItem);
         }
          // appends the row
-        divRow.appendChild(newRowItem);        
+        container.appendChild(newRowItem);        
     };
 };
 
 makeGrid();
-container.appendChild(divRow); 
+
+// wipes the original colItems and rowItems
+function reset() {
+    const resetColItems = container.querySelectorAll(".colItem");
+    resetColItems.forEach((e) => e.parentNode.removeChild(e));
+
+    const resetRowItems = container.querySelectorAll(".rowItem");
+    resetRowItems.forEach((e) => e.parentNode.removeChild(e));
+};
+
+// calls reset() to wipe prev grid, then prompts user for new amt
+// builds new grid based on new args value
+function changeGrid() {
+    reset();    
+    args = prompt('How many squares should we use? From 2 to 100.', '');
+    makeGrid(args);
+};
+
+// function resetGrid() {
+
+// }
+
+// function changeGrid() {
+//     resetGrid();
+//     args = getNewGridDimensions();
+//     container.removeChild()
+
+// }
+
+
+
 
 // tracks mouseenter and mouseleave to confirm each box handles events
 // function enterBox() {
