@@ -1,6 +1,15 @@
+body {
+    display:flex;
+    flex-direction: column;
+    flex:1;
+    max-width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
 #container {
     display: flex;
-    flex: 1;
+    /* flex: 1; */
     width: 980px;
     height: 980px;
     border-style: double;

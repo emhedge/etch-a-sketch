@@ -4,6 +4,16 @@ const divColumn = document.createElement('div');
 divRow.setAttribute('class', 'row');
 divColumn.setAttribute('class', 'column');
 
+// add a button to the top of the screen that will send the user 
+// a popup asking for the number of squares per side for the new grid. Once 
+// entered, the existing grid should be removed and a new grid should be 
+// generated in the same total space as before (e.g. 960px wide) so that 
+// you’ve got a new sketch pad. 
+const buttonDiv = document.querySelector('btn');
+
+
+
+
 // function for creating 16x16 divs
 // for loop with i up to 16
 // each iteration creates a new div and appends it
