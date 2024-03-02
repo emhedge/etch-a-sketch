@@ -32,24 +32,45 @@ makeGrid();
 container.appendChild(divRow); 
 
 // tracks mouseenter and mouseleave to confirm each box handles events
-let box = document.querySelectorAll('#container');
-for (let i = 0; i < box.length; i++) {
-    box[i].addEventListener('mouseenter', function() {
-        console.log('mouse entered the grid');
-    });
-    box[i].addEventListener('mouseleave', function() {
-    console.log('mouse left the grid');
-});
-}
+function enterBox() {
+    let box = document.querySelector('#container');
+    // for (let i = 0; i < box.length; i++) {
+        box.addEventListener('mouseenter', function() {
+            console.log('mouse entered the grid');
+            trackMouse();
+        });
 
+        box.addEventListener('mouseleave', function() {
+            console.log('mouse left the grid');
+            ignoreMouse();
+        });
+    };
 
-let track = document.querySelectorAll('.colItem');
-for (let i = 0; i < track.length; i++) {
-    track[i].addEventListener('mousemove', (e) => {
+// adds event listener for mouse tracking
+function trackMouse() {
+    let track = document.querySelectorAll('.colItem');
+    for (let i = 0; i < track.length; i++) {
+        track[i].addEventListener('mousemove', (e) => {
+            let log = document.querySelector('#log');
+            log.innerText = `
+            Screen X/Y: (${e.screenX}, ${e.screenY})
+            Client X/Y: (${e.clientX}, ${e.clientY})`
+        });
+    };
+};
+
+// removes event listener for mouse tracking to save memory
+function ignoreMouse() {
+    let ignoreMouse = document.querySelector('#container');
+    ignoreMouse.removeEventListener('mousemove', (e) => {
         let log = document.querySelector('#log');
         log.innerText = `
         Screen X/Y: (${e.screenX}, ${e.screenY})
         Client X/Y: (${e.clientX}, ${e.clientY})`
     });
-}
+    console.log('no longer tracking mouse');
+};
 
+
+
+enterBox();
