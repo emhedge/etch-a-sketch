@@ -3,6 +3,57 @@ const container = document.querySelector('#container');
 const rowItems = document.querySelectorAll('.rowItem');
 const colItems = document.querySelectorAll('.colItem');
 
+// top container selection, div creation, and id config
+const topCtr = document.querySelector('#top');
+const topLeft = document.createElement('div');
+const topMid = document.createElement('div');
+const topRight = document.createElement('div');
+topLeft.setAttribute('id', 'topLeft');
+topMid.setAttribute('id', 'topMid');
+topRight.setAttribute('id', 'topRight');
+
+// top title text
+const toyTitle1 = document.createElement('p');
+const toyTitle2 = document.createElement('p');
+const toyTitle3 = document.createElement('p');
+toyTitle1.setAttribute('class', 'toyTitle');
+toyTitle1.setAttribute('id', 'toyTitle1');
+toyTitle2.setAttribute('class', 'toyTitle');
+toyTitle2.setAttribute('id', 'toyTitle2');
+toyTitle3.setAttribute('class', 'toyTitle');
+toyTitle3.setAttribute('id', 'toyTitle3');
+toyTitle1.textContent = 'MAGIC';
+toyTitle2.textContent = 'Etch a Sketch';
+toyTitle3.textContent = 'SCREEN';
+
+// bottom container selection, div creation, and id config
+const bottomCtr = document.querySelector('#bottom');
+const bottomLeft = document.createElement('div');
+const bottomMid = document.createElement('div');
+const bottomRight = document.createElement('div');
+bottomLeft.setAttribute('id', 'bottomLeft');
+bottomMid.setAttribute('id', 'bottomMid');
+bottomRight.setAttribute('id', 'bottomRight');
+
+// bottom container knob img creation, src specification
+const knob1 = document.createElement('img');
+const knob2 = document.createElement('img');
+knob1.src = './images/knob.svg'
+knob2.src = './images/knob.svg'
+
+// append top and bottom ctr and child elements
+topCtr.appendChild(topLeft);
+topCtr.appendChild(topMid);
+topCtr.appendChild(topRight);
+topMid.appendChild(toyTitle1);
+topMid.appendChild(toyTitle2);
+topMid.appendChild(toyTitle3);
+bottomLeft.appendChild(knob1);
+bottomRight.appendChild(knob2);
+bottomCtr.appendChild(bottomLeft);
+bottomCtr.appendChild(bottomMid);
+bottomCtr.appendChild(bottomRight);
+
 
 // init declaration of selectedColor and args
 let selectedColor = 'black';
@@ -27,6 +78,10 @@ buttonDiv.addEventListener('click', (event) => {
             changeGrid();
             break;
         case 'eraser':
+            reset();
+            makeGrid();
+            break;
+        case 'white':
             addColor();
             selectedColor = 'white';
             break;
@@ -52,7 +107,7 @@ buttonDiv.addEventListener('click', (event) => {
             break;
         case 'red':
             addColor();
-            selectedColor = 'red';
+            selectedColor = 'rgb(197, 5, 5)';
             break;
         case 'purple':
             addColor();
@@ -151,9 +206,28 @@ function reset() {
 // builds new grid based on new args value
 function changeGrid() {
     reset();    
+
+    function confirmRange(args) {
+        return args >= 2 && args <=100
+    };
+
+    // let range = [];
+    // for (let i = 2; i <= 100; i++) {
+    //     range.push(i);
+    // };
+
     args = prompt('How many squares should we use? From 2 to 100.', '');
-    makeGrid(args);
+    confirmRange();
+
+    if (confirmRange(args) == true) {
+        makeGrid(args);
+    } else {
+        args = alert('Sorry, you must select a number between 2 and 100.');
+        changeGrid();
+    };
+        // prompt to reload page
 };
+
 
 // function resetGrid() {
 

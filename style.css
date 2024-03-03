@@ -10,23 +10,112 @@ body {
 #container {
     display: flex;
     /* flex: 1; */
+    background-color:rgba(179, 170, 153, 0.678);
     flex-direction: column;
     width: 980px;
     height: 980px;
-    border-style: solid;
-    border-color: black;
+    border: 9mm solid red;
 }
 
-/* .row {
+#top {
+    display: flex;
+    flex-direction: row;
+    height: 100px;
+    width: 1048px;
+    background-color: red;
+    padding-top: 8mm;
+    border-top-left-radius: 10mm;
+    border-top-right-radius: 10mm;
+    
+}
+
+#topLeft {
     display: flex;
     flex: 1;
-    flex-direction: column;
-    width:auto;
-    height:auto;
-    border-style:solid;
-    border-width: 1px;
+    /* justify-content: center; */
+    /* margin-left: 30px; */
+    /* border: 1mm solid black */
+}
+
+#topMid {
+    display: flex;
+    flex: 4;
+    justify-content: center;
+    align-items: center;
+    /* border: 1mm solid black */
+}
+
+#topRight {
+    display: flex;
+    flex: 1;
+    /* justify-content: right;
+    margin-right: 30px; */
+    /* border: 1mm solid black */
+}
+
+#toyTitle2 {
+    display: flex;
+    flex: 2;
+    justify-content: center;
+    color: #D4AF37;
+    font-family: 'Brush Script MT';
+    font-weight: 600;
+    /* margin: 0px 8px; */
+    font-size: 68px;
+    /* border: 0.5mm solid black; */
+}
+
+#toyTitle1, #toyTitle3 {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    color: #D4AF37;
+    font-family: 'Optima';
+    font-style: italic;
+    font-weight: 600;
+    /* margin: 0px 8px; */
+    font-size: 24px;
+    /* border: 0.5mm solid black; */
+}
+
+#bottom {
+    display: flex;
+    flex-direction: row;
+    height: 100px;
+    width: 1048px;
+    background-color: red;
+    padding-bottom: 8mm;
+    border-bottom-left-radius: 10mm;
+    border-bottom-right-radius: 10mm;
+}
+
+#bottomLeft {
+    display: flex;
+    flex: 1;
+    justify-content: left;
+    margin-left: 30px;
+    /* border: 1mm solid black */
+}
+
+#bottomMid {
+    display: flex;
+    flex: 3;
+    /* border: 1mm solid black */
+}
+
+#bottomRight {
+    display: flex;
+    flex: 1;
+    justify-content: right;
+    margin-right: 30px;
+    /* border: 1mm solid black */
+}
+
+#divRow {
+    display: flex;
+    border-style: dashed;
     border-color: black;
-} */
+}
 
 .rowItem {
     display: flex;
@@ -43,25 +132,72 @@ body {
     flex-direction: row;
     width:auto;
     height:auto;
-    /* border-style:solid;
-    border-width: 1px;
-    border-color: black; */
 }
 
-
-/* .column {
+#buttonDiv {
     display: flex;
-    flex: 1;
+    /* flex-direction: row; */
+    /* flex: 1; */
+    /* justify-content: space-between; */
+}
+
+.specialButtons {
+    display: flex;
     flex-direction: column;
-    width:auto;
-    height:auto;
-    border-style:solid;
-    border-width: 1px;
-    border-color: black;
-} */
+}
 
-#divRow {
+.colorButtons {
     display: flex;
-    border-style: dashed;
-    border-color: black;
+    flex-direction: row;
+    margin-left: 8px;
+}
+
+.specialButton {
+    height: 25px;
+    width: 100px;
+    border-radius: 2mm;
+}
+
+.colorButton {
+    height: 50px;
+    width: 80px;
+    border-radius: 2mm;
+    border: 0.5mm solid black;
+    margin: 0px 2px;
+}
+
+#white {
+    background-color: white;   
+}
+
+#black {
+    background-color: black;   
+}
+
+#blue {
+    background-color: blue;   
+}
+
+#green {
+    background-color: green;   
+}
+
+#yellow {
+    background-color: yellow;
+}
+
+#orange {
+    background-color: orange;
+}
+
+#red {
+    background-color: rgb(197, 5, 5);
+}
+
+#purple {
+    background-color: purple;
+}
+
+#rainbow {
+    background: url("./images/rainbow.svg") top left;  
 }
