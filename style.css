@@ -12,18 +12,22 @@ body {
     /* flex: 1; */
     background-color:rgba(179, 170, 153, 0.678);
     flex-direction: column;
-    width: 980px;
-    height: 980px;
-    border: 9mm solid red;
+    width: 600px;
+    height: 340px;
+    border-left: 9mm solid red;
+    border-right: 9mm solid red;
+    border-top: 0;
+    border-bottom: 0;
 }
 
 #top {
     display: flex;
     flex-direction: row;
     height: 100px;
-    width: 1048px;
+    width: 668px;
     background-color: red;
-    padding-top: 8mm;
+    padding-top: 5mm;
+    padding-bottom: 5mm;
     border-top-left-radius: 10mm;
     border-top-right-radius: 10mm;
     
@@ -61,7 +65,7 @@ body {
     font-family: 'Brush Script MT';
     font-weight: 600;
     /* margin: 0px 8px; */
-    font-size: 68px;
+    font-size: 42px;
     /* border: 0.5mm solid black; */
 }
 
@@ -74,7 +78,7 @@ body {
     font-style: italic;
     font-weight: 600;
     /* margin: 0px 8px; */
-    font-size: 24px;
+    font-size: 20px;
     /* border: 0.5mm solid black; */
 }
 
@@ -82,9 +86,10 @@ body {
     display: flex;
     flex-direction: row;
     height: 100px;
-    width: 1048px;
+    width: 668px;
     background-color: red;
-    padding-bottom: 8mm;
+    padding-top: 5mm;
+    padding-bottom: 5mm;
     border-bottom-left-radius: 10mm;
     border-bottom-right-radius: 10mm;
 }
@@ -154,13 +159,13 @@ body {
 
 .specialButton {
     height: 25px;
-    width: 100px;
+    width: 90px;
     border-radius: 2mm;
 }
 
 .colorButton {
     height: 50px;
-    width: 80px;
+    width: 60px;
     border-radius: 2mm;
     border: 0.5mm solid black;
     margin: 0px 2px;
