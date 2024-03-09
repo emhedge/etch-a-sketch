@@ -64,16 +64,8 @@ document.addEventListener('DOMContentLoaded',() => {
     addColor();
 });
 
-// rowItems.setAttribute('class', 'row');
-
-// add a button to the top of the screen that will send the user 
-// a popup asking for the number of squares per side for the new grid. Once 
-// entered, the existing grid should be removed and a new grid should be 
-// generated in the same total space as before (e.g. 960px wide) so that 
-// you’ve got a new sketch pad. 
 const buttonDiv = document.querySelector('#buttonDiv');
-
-
+const eraser = document.querySelector('button#eraser.specialButton');
 
 
 // button event handlers for various colors
@@ -84,6 +76,7 @@ buttonDiv.addEventListener('click', (event) => {
 
         case 'changeGrid':
             changeGrid();
+            addColor();
             break;
         case 'eraser':
             reset();
@@ -214,25 +207,25 @@ function reset() {
 // calls reset() to wipe prev grid, then prompts user for new amt
 // builds new grid based on new args value
 function changeGrid() {
-    reset();    
 
     function confirmRange(args) {
         return args >= 2 && args <=100
     };
 
-    // let range = [];
-    // for (let i = 2; i <= 100; i++) {
-    //     range.push(i);
-    // };
-
     args = prompt('How many squares should we use? From 2 to 100.', '');
+    
     confirmRange();
 
     if (confirmRange(args) == true) {
+        reset();
         makeGrid(args);
-    } else {
-        args = alert('Sorry, you must select a number between 2 and 100.');
+    } else if (args == "null" || args == null || args == "" ) {
+        return;
+    } else if ((confirmRange(args) <2) | (confirmRange(args) > 100)) {
+        alert('Sorry, you must select a number between 2 and 100.');
         changeGrid();
+    // } else if (args == NaN) {
+    //     alert('Sorry about that - you can only put in integers between 2 and 100.');
     };
         // prompt to reload page
 };
