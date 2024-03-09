@@ -59,6 +59,11 @@ bottomCtr.appendChild(bottomRight);
 let selectedColor = 'black';
 let args = 32;
 
+// init default color functionality on page load
+document.addEventListener('DOMContentLoaded',() => {
+    addColor();
+});
+
 // rowItems.setAttribute('class', 'row');
 
 // add a button to the top of the screen that will send the user 
@@ -67,6 +72,9 @@ let args = 32;
 // generated in the same total space as before (e.g. 960px wide) so that 
 // you’ve got a new sketch pad. 
 const buttonDiv = document.querySelector('#buttonDiv');
+
+
+
 
 // button event handlers for various colors
 buttonDiv.addEventListener('click', (event) => {
@@ -137,7 +145,8 @@ function getRainbow() {
 // called and that value is applied as the event target background
 function paintRainbow() {
     const rainbowTarget = document.querySelectorAll('.colItem');
-        
+    selectedColor = 'black';
+
     for (let i = 0; i < rainbowTarget.length; i++) {
         
         rainbowTarget[i].addEventListener('mouseenter', function (e) {
