@@ -20,6 +20,19 @@ body {
     border-bottom: 0;
 }
 
+#canvas {
+    display: flex;
+    /* flex: 1; */
+    background-color:rgba(179, 170, 153, 0.678);
+    flex-direction: column;
+    width: 600px;
+    height: 340px;
+    border-left: 9mm solid red;
+    border-right: 9mm solid red;
+    border-top: 0;
+    border-bottom: 0;
+}
+
 #top {
     display: flex;
     flex-direction: row;
