@@ -140,16 +140,26 @@ function paintRainbow() {
     const rainbowTarget = document.querySelectorAll('.colItem');
     selectedColor = 'black';
 
-    for (let i = 0; i < rainbowTarget.length; i++) {
+    if (isMobile() == false) {
+        for (let i = 0; i < rainbowTarget.length; i++) {
+            
+            rainbowTarget[i].addEventListener('mouseenter', function (e) {
+                e.target.style.background = getRainbow();
+            });
+                    
+            console.log('something was painted rainbow');
+            
+        }
+    }
+    if (isMobile()) {
+        for (let i = 0; i < rainbowTarget.length; i++) {
         
-        rainbowTarget[i].addEventListener('mouseenter', function (e) {
-            e.target.style.background = getRainbow();
-        });
-                
-        console.log('something was painted rainbow');
-        
-    };
-};
+            rainbowTarget[i].addEventListener('mousedown', function (e) {
+                e.target.style.background = getRainbow();
+            }); 
+            console.log('something was painted rainbow on mobile');};
+    }
+}
 
 // adds color to colItem background based upon value of selectedColor
 // adds event listener to each colItem, when mouseover occurs,
@@ -159,12 +169,24 @@ function addColor() {
     const paintTarget = document.querySelectorAll('.colItem');
 
 
-    if (selectedColor !== rainbow) {
+    if (isMobile() == false) {
+        if (selectedColor !== rainbow) {
+            for (let i = 0; i < paintTarget.length; i++) {
+            
+                paintTarget[i].addEventListener('mouseenter', function (e) {
+                    e.target.style.background = selectedColor;
+                    console.log('something was painted');
+                }); 
+            } 
+        }
+    }
+
+    if (isMobile()) {
         for (let i = 0; i < paintTarget.length; i++) {
         
-            paintTarget[i].addEventListener('mouseenter', function (e) {
+            paintTarget[i].addEventListener('mousedown', function (e) {
                 e.target.style.background = selectedColor;
-                console.log('something was painted ');
+                console.log('something was painted on mobile');
             }); 
         };
     }
@@ -301,129 +323,133 @@ function isMobile() {
     const regex = /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/;
     console.log('mobile detected')
     return regex.test(navigator.userAgent);
-    
 }
 
-if (isMobile()) {
+isMobile();
+
+// if (isMobile()) {
     
-    const canvas = document.createElement('canvas')
-    canvas.setAttribute('id', 'canvas');
-    game.replaceChild(canvas, container);
+//     const canvas = document.createElement('canvas')
+//     canvas.setAttribute('id', 'canvas');
+//     game.replaceChild(canvas, container);
 
-    function startup() {
-        const el = document.getElementById("canvas");
-        el.addEventListener("touchstart", handleStart);
-        // el.addEventListener("touchend", handleEnd);
-        // el.addEventListener("touchcancel", handleCancel);
-        // el.addEventListener("touchmove", handleMove);
-        console.log("Initialized.");
-        // log("Initialized");
-      }
+//     function startup() {
+//         const el = document.getElementById("canvas");
+//         el.addEventListener("touchstart", handleStart);
+//         // el.addEventListener("touchend", handleEnd);
+//         // el.addEventListener("touchcancel", handleCancel);
+//         // el.addEventListener("touchmove", handleMove);
+//         console.log("Initialized.");
+//         // log("Initialized");
+//       }
       
-      document.addEventListener("DOMContentLoaded", startup);
-      const ongoingTouches = [];
+//       document.addEventListener("DOMContentLoaded", startup);
+//       const ongoingTouches = [];
 
-      function handleStart(evt) {
-        evt.preventDefault();
-        console.log("touchstart.");
-        // log("touchstart.");
-        const el = document.getElementById("canvas");
-        const ctx = el.getContext("2d");
-        const touches = evt.changedTouches;
+//       function handleStart(evt) {
+//         evt.preventDefault();
+//         console.log("touchstart.");
+//         // log("touchstart.");
+//         const el = document.getElementById("canvas");
+//         const ctx = el.getContext("2d");
+//         const touches = evt.changedTouches;
       
-        for (let i = 0; i < touches.length; i++) {
-          console.log(`touchstart: ${i}.`);
-          ongoingTouches.push(copyTouch(touches[i]));
-          const color = colorForTouch(touches[i]);
-          console.log(`color of touch with id ${touches[i].identifier} = ${color}`);
-          ctx.beginPath();
-          ctx.arc(touches[i].pageX, touches[i].pageY, 4, 0, 2 * Math.PI, false); // a circle at the start
-          ctx.fillStyle = color;
-          ctx.fill();
-        }
-      }
+//         for (let i = 0; i < touches.length; i++) {
+//           console.log(`touchstart: ${i}.`);
+//           ongoingTouches.push(copyTouch(touches[i]));
+//           const color = colorForTouch(touches[i]);
+//           console.log(`color of touch with id ${touches[i].identifier} = ${color}`);
+//           ctx.beginPath();
+//           ctx.arc(touches[i].pageX, touches[i].pageY, 4, 0, 2 * Math.PI, false); // a circle at the start
+//           ctx.fillStyle = color;
+//           ctx.fill();
+//         }
+//       }
 
-      function handleMove(evt) {
-        evt.preventDefault();
-        const el = document.getElementById("canvas");
-        const ctx = el.getContext("2d");
-        const touches = evt.changedTouches;
+//       function handleMove(evt) {
+//         evt.preventDefault();
+//         const el = document.getElementById("canvas");
+//         const ctx = el.getContext("2d");
+//         const touches = evt.changedTouches;
       
-        for (let i = 0; i < touches.length; i++) {
-          const color = colorForTouch(touches[i]);
-          const idx = ongoingTouchIndexById(touches[i].identifier);
+//         for (let i = 0; i < touches.length; i++) {
+//           const color = colorForTouch(touches[i]);
+//           const idx = ongoingTouchIndexById(touches[i].identifier);
       
-          if (idx >= 0) {
-            console.log(`continuing touch ${idx}`);
-            ctx.beginPath();
-            console.log(
-              `ctx.moveTo( ${ongoingTouches[idx].pageX}, ${ongoingTouches[idx].pageY} );`,
-            );
-            ctx.moveTo(ongoingTouches[idx].pageX, ongoingTouches[idx].pageY);
-            console.log(`ctx.lineTo( ${touches[i].pageX}, ${touches[i].pageY} );`);
-            ctx.lineTo(touches[i].pageX, touches[i].pageY);
-            ctx.lineWidth = 4;
-            ctx.strokeStyle = color;
-            ctx.stroke();
+//           if (idx >= 0) {
+//             console.log(`continuing touch ${idx}`);
+//             ctx.beginPath();
+//             console.log(
+//               `ctx.moveTo( ${ongoingTouches[idx].pageX}, ${ongoingTouches[idx].pageY} );`,
+//             );
+//             ctx.moveTo(ongoingTouches[idx].pageX, ongoingTouches[idx].pageY);
+//             console.log(`ctx.lineTo( ${touches[i].pageX}, ${touches[i].pageY} );`);
+//             ctx.lineTo(touches[i].pageX, touches[i].pageY);
+//             ctx.lineWidth = 4;
+//             ctx.strokeStyle = color;
+//             ctx.stroke();
       
-            ongoingTouches.splice(idx, 1, copyTouch(touches[i])); // swap in the new touch record
-          } else {
-            console.log("can't figure out which touch to continue");
-          }
-        }
-      }
+//             ongoingTouches.splice(idx, 1, copyTouch(touches[i])); // swap in the new touch record
+//           } else {
+//             console.log("can't figure out which touch to continue");
+//           }
+//         }
+//       }
       
-      function handleEnd(evt) {
-        evt.preventDefault();
-        console.log("touchend");
-        const el = document.getElementById("canvas");
-        const ctx = el.getContext("2d");
-        const touches = evt.changedTouches;
+//       function handleEnd(evt) {
+//         evt.preventDefault();
+//         console.log("touchend");
+//         const el = document.getElementById("canvas");
+//         const ctx = el.getContext("2d");
+//         const touches = evt.changedTouches;
       
-        for (let i = 0; i < touches.length; i++) {
-          const color = colorForTouch(touches[i]);
-          let idx = ongoingTouchIndexById(touches[i].identifier);
+//         for (let i = 0; i < touches.length; i++) {
+//           const color = colorForTouch(touches[i]);
+//           let idx = ongoingTouchIndexById(touches[i].identifier);
       
-          if (idx >= 0) {
-            ctx.lineWidth = 4;
-            ctx.fillStyle = color;
-            ctx.beginPath();
-            ctx.moveTo(ongoingTouches[idx].pageX, ongoingTouches[idx].pageY);
-            ctx.lineTo(touches[i].pageX, touches[i].pageY);
-            ctx.fillRect(touches[i].pageX - 4, touches[i].pageY - 4, 8, 8); // and a square at the end
-            ongoingTouches.splice(idx, 1); // remove it; we're done
-          } else {
-            console.log("can't figure out which touch to end");
-          }
-        }
-      }
+//           if (idx >= 0) {
+//             ctx.lineWidth = 4;
+//             ctx.fillStyle = color;
+//             ctx.beginPath();
+//             ctx.moveTo(ongoingTouches[idx].pageX, ongoingTouches[idx].pageY);
+//             ctx.lineTo(touches[i].pageX, touches[i].pageY);
+//             ctx.fillRect(touches[i].pageX - 4, touches[i].pageY - 4, 8, 8); // and a square at the end
+//             ongoingTouches.splice(idx, 1); // remove it; we're done
+//           } else {
+//             console.log("can't figure out which touch to end");
+//           }
+//         }
+//       }
 
-      function handleCancel(evt) {
-        evt.preventDefault();
-        console.log("touchcancel.");
-        const touches = evt.changedTouches;
+//       function handleCancel(evt) {
+//         evt.preventDefault();
+//         console.log("touchcancel.");
+//         const touches = evt.changedTouches;
       
-        for (let i = 0; i < touches.length; i++) {
-          let idx = ongoingTouchIndexById(touches[i].identifier);
-          ongoingTouches.splice(idx, 1); // remove it; we're done
-        }
-      }
+//         for (let i = 0; i < touches.length; i++) {
+//           let idx = ongoingTouchIndexById(touches[i].identifier);
+//           ongoingTouches.splice(idx, 1); // remove it; we're done
+//         }
+//       }
 
-      function copyTouch({ identifier, pageX, pageY }) {
-        return { identifier, pageX, pageY };
-      }
+//       function copyTouch({ identifier, pageX, pageY }) {
+//         return { identifier, pageX, pageY };
+//       }
 
-      function colorForTouch() {
-        // let r = touch.identifier % 16;
-        // let g = Math.floor(touch.identifier / 3) % 16;
-        // let b = Math.floor(touch.identifier / 7) % 16;
-        // r = r.toString(16); // make it a hex digit
-        // g = g.toString(16); // make it a hex digit
-        // b = b.toString(16); // make it a hex digit
-        // const color = `#${r}${g}${b}`;
-        const color = selectedColor;
-        return color;
-      }
+//       function colorForTouch() {
+//         // let r = touch.identifier % 16;
+//         // let g = Math.floor(touch.identifier / 3) % 16;
+//         // let b = Math.floor(touch.identifier / 7) % 16;
+//         // r = r.toString(16); // make it a hex digit
+//         // g = g.toString(16); // make it a hex digit
+//         // b = b.toString(16); // make it a hex digit
+//         // const color = `#${r}${g}${b}`;
+//         const color = selectedColor;
+//         return color;
+//       }
+
+
+    // wrong stuff  
     // for (let i = 0; i < paintTarget.length; i++) {
     
     //     paintTarget[i].addEventListener('touchstart', function (e) {
@@ -431,4 +457,4 @@ if (isMobile()) {
     //         console.log('something was painted on mobile');
     //     }); 
     // }
-}
+// }
